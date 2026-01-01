@@ -32,7 +32,7 @@ function setup() {
   gui = createGui();
 
   describeElement('Measure Button', 'A button that causes the amount of water in the cylinder to be displayed to the correct digits.');
-  Btn = createButton("Measure", 0.05 * width, 0.05 * width, 128, 32);
+  Btn = createButton("Measure", 0.05 * width, 0.05 * width, 0.128 * width, 0.032 * width);
   Btn.setStyle({
     textSize: 18 * width / 1000
   });
@@ -43,7 +43,7 @@ function setup() {
 
 function draw() {
   background(255);
-  image(smallWaterPic, -6, 0.5 * (waterHeight1 * width / 1000), width, height);
+  image(smallWaterPic, -0.006 * width, 0.5 * (waterHeight1 * width / 1000), width, height);
   image(largeWaterPic, 0, 3 * (waterHeight2 * width / 1000), width, height);
   image(CylinderPic, 0, 0, width, height);
 
@@ -62,12 +62,12 @@ function draw() {
     let largeText = 70 - 10 * (i + 1);
     textSize(floor(16 * width / 1000));
     textFont(Chewy);
-    rect(0.312 * width, largeTic, 25 * width / 1000, 2); // Draw major ticks
-    text(largeText, 0.29 * width, largeTic + 5); // Display unit labels
+    rect(0.312 * width, largeTic * width / 1000, 25 * width / 1000, 2); // Draw major ticks
+    text(largeText, 0.29 * width, (largeTic + 5) * width / 1000); // Display unit labels
     if (i < 5) {
       for (let j = 0; j < 10; j++) {
         let smallTic = largeTic + (j + 1) * 5;
-        rect(0.332 * width, smallTic, 5 * width / 1000, 1);
+        rect(0.332 * width, smallTic * width / 1000, 5 * width / 1000, 1 * width / 1000);
 
       }
     }
@@ -79,12 +79,12 @@ function draw() {
     let largeText = 60 - 10 * (i + 1);
     textSize(floor(50 * width / 1000));
     textFont(Chewy);
-    rect(0.75 * width, largeTic, 100 * width / 1000, 8); // Draw major ticks
-    text(largeText, 0.68 * width, largeTic + 16); // Display unit labels
+    rect(0.75 * width, largeTic * width / 1000, 100 * width / 1000, 8 * width / 1000); // Draw major ticks
+    text(largeText, 0.68 * width, (largeTic + 16) * width / 1000); // Display unit labels
     if (i < 2) {
       for (let j = 0; j < 10; j++) {
         let smallTic = largeTic + (j + 1) * 30;
-        rect(0.81 * width, smallTic, 40 * width / 1000, 2);
+        rect(0.81 * width, smallTic * width / 1000, 40 * width / 1000, 2 * width / 1000);
 
       }
     }
@@ -95,13 +95,12 @@ function draw() {
   stroke(193, 20, 20);
   fill(193, 20, 20);
   if (Btn.isHeld) {
-    rect(0.68 * width, 3 * (waterHeight2 * width / 1000) + 100, 0.18 * width, 2);
+    rect(0.68 * width, 3 * (waterHeight2 * width / 1000) + 0.100 * width, 0.18 * width, 2);
     let waterAmount = 29.2 + slider.val / 10;
     let textAmount = waterAmount.toFixed(1) + " mL";
     textSize(floor(70 * width / 1000));
     textFont(Chewy);
-    text(textAmount, 215, 100);
-    text
+    text(textAmount, 0.215 * width, 0.1 * width);
   }
   pop();
 
@@ -113,8 +112,12 @@ function touchMoved() {
 }
 
 function windowResized() {
-  if (windowWidth < 1000) {
+  if (windowWidth < 1000 && windowWidth < 1000 * windowHeight / 700) {
     resizeCanvas(windowWidth, (700 / 1000) * windowWidth);
+  }
+  else if (windowHeight < 700 && windowHeight < 0.7 * windowWidth) {
+    resizeCanvas(1000 * windowHeight / 700, windowHeight);
+
   } else {
     resizeCanvas(1000, 700);
   }
