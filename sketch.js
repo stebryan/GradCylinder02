@@ -111,13 +111,21 @@ function touchMoved() {
   return false; // This line is key to stopping default scrolling
 }
 
-function windowResized() {
-  if (windowWidth < 1000 && windowWidth < 1000 * windowHeight / 700) {
+function deviceTurned() {
+  if (windowWidth < 1000 * windowHeight / 700) {
     resizeCanvas(windowWidth, (700 / 1000) * windowWidth);
-  }
-  else if (windowHeight < 700 && windowHeight < 0.7 * windowWidth) {
+  } else if (windowHeight < 0.7 * windowWidth) {
     resizeCanvas(1000 * windowHeight / 700, windowHeight);
+  } else {
+    resizeCanvas(1000, 700);
+  }
+}
 
+function windowResized() {
+  if (windowWidth < 1000 * windowHeight / 700) {
+    resizeCanvas(windowWidth, (700 / 1000) * windowWidth);
+  } else if (windowHeight < 0.7 * windowWidth) {
+    resizeCanvas(1000 * windowHeight / 700, windowHeight);
   } else {
     resizeCanvas(1000, 700);
   }
