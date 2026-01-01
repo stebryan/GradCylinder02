@@ -37,7 +37,7 @@ function setup() {
   });
 
   describeElement('Slider', 'The slider controls the water level in the graduated cylinder and changes the amount displayed.')
-  slider = createSliderV("slider", 0.9 * width, 0.2 * height, 0.03 * width, width / 3, 0, 200);
+  slider = createSliderV("slider", 0.1 * width, 0.2 * width, 0.03 * width, width / 3, 0, 200);
 }
 
 function draw() {
@@ -129,3 +129,7 @@ function windowResized() {
     resizeCanvas(1000, 700);
   }
 }
+
+window.addEventListener('resize', function () {
+  window.location.reload();
+});
