@@ -2,17 +2,14 @@ let CylinderPic;
 let smallWaterPic;
 let largeWaterPic;
 let Chewy;
-//let ComicNeue;
 let Btn;
 let slider;
 let gui;
 let waterHeight1 = 0;
 let waterHeight2 = 0;
-//let units;
 
 function preload() {
   Chewy = loadFont('assets/ComicNeue-Bold.ttf');
-  //ComicNeue = loadFont('assets/ComicNeue-Regular.ttf');
   CylinderPic = loadImage('assets/cylinderZoom.png');
   largeWaterPic = loadImage('assets/largeWater.png');
   smallWaterPic = loadImage('assets/smallWater.png');
@@ -23,10 +20,12 @@ function setup() {
   describe('A 2-D drawing of a graduated cylinder containing water with a meniscus and a zoomed in image that shows how to measure volume to the correct digit.');
 
   fill(255); //white background
-  if (windowWidth < 1000) {
-    createCanvas(windowWidth, (700 / 1000) * windowWidth);
+  if (windowWidth < 1000 * windowHeight / 700) {
+    resizeCanvas(windowWidth, (700 / 1000) * windowWidth);
+  } else if (windowHeight < 0.7 * windowWidth) {
+    resizeCanvas(1000 * windowHeight / 700, windowHeight);
   } else {
-    createCanvas(1000, 700);
+    resizeCanvas(1000, 700);
   } //changes canvase size based on device if the device is small
 
   gui = createGui();
